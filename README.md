@@ -24,3 +24,11 @@ Advantages relatively to the `ILIKE` method:
 
 * Language specific semantic help: searching for the word "fox" will match the words "fox" and "foxes" but not "foxtrot" (because "foxes" gets normalized as "fox" by `to_tsvector` but "foxtrot" does not)
 * Results ranking by relevance
+
+First step : associate a text search vector to each entry:
+`UPDATE book SET tokens = to_tsvector('french', coalesce(title, ''));`
+=> TODO: include other columns in vector
+
+Step 2: search
+`SELECT title, author FROM book WHERE tokens @@ to_tsquery('french', 'lent');`
+=> TODO: include other columns in vector
