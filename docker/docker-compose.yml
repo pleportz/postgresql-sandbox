@@ -1,0 +1,9 @@
+version: '3'
+services:
+  demo-database:
+    build: ./config
+    image: demo-database
+    container_name: demo-database
+    env_file: ./config/env.config
+    ports:
+      - 5432:5432

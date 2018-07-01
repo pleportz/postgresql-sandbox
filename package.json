@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "babel-register": "^6.26.0",
+    "knex": "^0.14.6",
+    "pg": "^7.4.3"
+  }
+}

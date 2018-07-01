@@ -1,0 +1,42 @@
+[
+  {
+    "datasetid": "titres-les-plus-pretes-bibliotheques-specialisees-en-2014",
+    "recordid": "62e099db9f9c3b45d77f1e6044537c84f134b944",
+    "fields": {
+      "annee_edition": 2015,
+      "nb_prets_2017": 1.0,
+      "auteur": "Zem, Roschdy--1965-.... 370. 690",
+      "editeur":
+        "Paris : France T\u00e9l\u00e9visions Distribution [\u00e9d.], cop. 2015",
+      "categorie_documentaire": "DVD",
+      "titre": "Bodybuilder"
+    },
+    "record_timestamp": "2017-09-21T18:00:26+02:00"
+  },
+  {
+    "datasetid": "titres-les-plus-pretes-bibliotheques-specialisees-en-2014",
+    "recordid": "39994be2a34908121a3c0f7bf2fe31570b4836f1",
+    "fields": {
+      "annee_edition": 2001,
+      "nb_prets_2017": 3.0,
+      "auteur": "Zemeckis, Robert--1951-.... 370",
+      "editeur": "Paris : Universal Pictures Video [\u00e9d.], cop. 2006",
+      "categorie_documentaire": "DVD",
+      "titre": "Forrest Gump"
+    },
+    "record_timestamp": "2017-09-21T18:00:26+02:00"
+  },
+  {
+    "datasetid": "titres-les-plus-pretes-bibliotheques-specialisees-en-2014",
+    "recordid": "6e7810bf75e2f62a3a080baef60f86d0d67c959a",
+    "fields": {
+      "annee_edition": 2008,
+      "nb_prets_2017": 4.0,
+      "auteur": "Zemeckis, Robert--1951-.... 370",
+      "editeur": "Neuilly-sur-Seine : Warner Bros France [\u00e9d.], cop. 2008",
+      "categorie_documentaire": "DVD",
+      "titre": "Le l\u00e9gende de Beowulf"
+    },
+    "record_timestamp": "2017-09-21T18:00:26+02:00"
+  }
+]
