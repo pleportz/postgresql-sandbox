@@ -14,13 +14,13 @@ We want to search the table for books that contain the `inputString` either in t
 
 ### Method 1 - using ILIKE
 
-`SELECT COUNT(*) FROM book WHERE title ILIKE '%lent%' OR author ILIKE '%lent%' OR editor ILIKE '%lent%' OR category ILIKE '%lent%';` -> 22 results
+`SELECT title, author, editor, category, "lendingNumber2017" FROM book WHERE title ILIKE '%lent%' OR author ILIKE '%lent%' OR editor ILIKE '%lent%' OR category ILIKE '%lent%';` -> 22 results
 
-`SELECT title, author, editor, category, "lendingNumber2017" FROM book WHERE title ILIKE '%lent%' OR author ILIKE '%lent%' OR editor ILIKE '%lent%' OR category ILIKE '%lent%';`
-Average timing on 10 tries: 33,887 ms
+Average timing of 1 request (10 tries): **33,887 ms**
 
 ### Method 2 - using full text search
 
 Advantages:
 
+* Language specific semantic help: searching for the word "fox" will match the words "fox", "foxes" but not "foxtrot" (because "foxes" gets normalized as "fox" by `to_tsvector` but "foxtrot" does not)
 * results ranking by relevance
