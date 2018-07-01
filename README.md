@@ -20,7 +20,7 @@ Average timing of 1 request (10 tries): **33,887 ms**
 
 ### Method 2 - using full text search
 
-Advantages:
+Advantages relatively to the `ILIKE` method:
 
-* Language specific semantic help: searching for the word "fox" will match the words "fox", "foxes" but not "foxtrot" (because "foxes" gets normalized as "fox" by `to_tsvector` but "foxtrot" does not)
-* results ranking by relevance
+* Language specific semantic help: searching for the word "fox" will match the words "fox" and "foxes" but not "foxtrot" (because "foxes" gets normalized as "fox" by `to_tsvector` but "foxtrot" does not)
+* Results ranking by relevance
