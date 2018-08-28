@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "db:connect":
+      "docker exec -ti demo-database psql -h localhost -p 5432 -U docker -d demodb"
+  },
   "dependencies": {
     "babel-register": "^6.26.0",
     "knex": "^0.14.6",

@@ -16,7 +16,7 @@ We want to search the table for books that contain the `inputString` either in t
 
 `SELECT title, author, editor, category, "lendingNumber2017" FROM book WHERE title ILIKE '%lent%' OR author ILIKE '%lent%' OR editor ILIKE '%lent%' OR category ILIKE '%lent%';` -> 22 results
 
-Average timing of 1 request (10 tries): **33,887 ms**
+Average timing of 1 request over 10 tries: **33,887 ms**
 
 ### Method 2 - using full text search
 
