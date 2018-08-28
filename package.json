@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "db:populate": "yarn knex migrate:latest && yarn knex seed:run",
     "db:connect":
       "docker exec -ti demo-database psql -h localhost -p 5432 -U docker -d demodb"
   },
