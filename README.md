@@ -35,7 +35,7 @@ Associate a text search vector to each entry:
 
 Search:
 
-`SELECT title, author, editor, category FROM book WHERE tokens @@ to_tsquery('french', 'manger');`
+`SELECT title, author, editor, category FROM book WHERE tokens @@ to_tsquery('french', 'sciences');`
 
 => Average timing over 10 tries : **4.10 ms (query duration decreased by 88%)**
 
@@ -47,6 +47,8 @@ Add A, B, C or D weights to tokens (highest relevance is A and lowest is D). In 
 
 `UPDATE book SET tokens = setweight(to_tsvector('french', coalesce(title, '')), 'A') || setweight(to_tsvector('french', coalesce(author, '')), 'A') || setweight(to_tsvector('french', coalesce(editor, '')), 'C') || setweight(to_tsvector('french', coalesce(category, '')), 'B');`
 
-Then you can get ranked results using the ts_rank function, that computes a matching coefficient:
+Then you can get ranked results using the `ts_rank` function, that computes a matching coefficient:
 
-`SELECT title, author, editor, category, ts_rank(tokens, to_tsquery('french', 'littérature')) FROM book WHERE tokens @@ to_tsquery('french', 'littérature') ORDER BY ts_rank(tokens, to_tsquery('french', 'littérature')) DESC;`
+`SELECT title, author, editor, category, ts_rank(tokens, to_tsquery('french', 'histoire')) FROM book WHERE tokens @@ to_tsquery('french', 'histoire') ORDER BY ts_rank(tokens, to_tsquery('french', 'histoire')) DESC;`
+
+Note: "histoire" is an interesting input because the first two results have different `ts_rank` results.
