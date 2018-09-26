@@ -43,4 +43,10 @@ We can see the advantage of full text search versus the ILIKE method when we sea
 
 **Step 3**
 
-add ranking with setweight - TODO
+Add A, B, C or D weights to tokens (highest relevance is A and lowest is D). In this example we consider the `title` and the `author` to be the most relevant criteria and therefore they have the `A` rank, while `category` and `editor` are ranked `B` and `C` respectively:
+
+`UPDATE book SET tokens = setweight(to_tsvector('french', coalesce(title, '')), 'A') || setweight(to_tsvector('french', coalesce(author, '')), 'A') || setweight(to_tsvector('french', coalesce(editor, '')), 'C') || setweight(to_tsvector('french', coalesce(category, '')), 'B');`
+
+Then you can get ranked results using the ts_rank function, that computes a matching coefficient:
+
+`SELECT title, author, editor, category, ts_rank(tokens, to_tsquery('french', 'littérature')) FROM book WHERE tokens @@ to_tsquery('french', 'littérature') ORDER BY ts_rank(tokens, to_tsquery('french', 'littérature')) DESC;`
