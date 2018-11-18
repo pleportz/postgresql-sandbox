@@ -1,4 +1,5 @@
 const books = require("./data/28181-books-with-lended-count-in-France-in-2017.json");
+const movies = require("./data/kaggleMovies.json");
 
 const booksToInsert = books.slice(0, 10000).map(book => ({
   title: book.fields.titre,
@@ -10,5 +11,9 @@ const booksToInsert = books.slice(0, 10000).map(book => ({
 }));
 
 exports.seed = function(knex, Promise) {
-  return knex("book").insert(booksToInsert);
+  return knex("book")
+    .insert(booksToInsert)
+    .then(() => {
+      return knex("movie").insert(movies);
+    });
 };
