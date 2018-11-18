@@ -1,12 +1,18 @@
 {
   "scripts": {
     "db:populate": "yarn knex migrate:latest && yarn knex seed:run",
-    "db:connect":
-      "docker exec -ti demo-database psql -h localhost -p 5432 -U docker -d demodb"
+    "db:connect": "docker exec -ti demo-database psql -h localhost -p 5432 -U docker -d demodb"
   },
   "dependencies": {
     "babel-register": "^6.26.0",
     "knex": "^0.14.6",
     "pg": "^7.4.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/node": "^7.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "papaparse": "^4.6.2"
   }
 }

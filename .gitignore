@@ -1,2 +1,4 @@
 node_modules
 database/open-food-facts
+database/seeds/data/kaggle-movies
+
