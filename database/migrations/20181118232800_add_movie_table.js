@@ -7,7 +7,6 @@ exports.up = function(knex, Promise) {
       .primary();
     table.string("title");
     table.text("overview");
-    table.specificType("tokens", "TSVECTOR");
   });
 };
 

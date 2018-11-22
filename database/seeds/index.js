@@ -15,5 +15,7 @@ exports.seed = function(knex, Promise) {
     .insert(booksToInsert)
     .then(() => {
       return knex("movie").insert(movies);
-    });
+    })
+    .then(() => knex.schema.raw("UPDATE movie SET text_search_vector = setweight(to_tsvector('english', coalesce(title, '')), 'A') || setweight(to_tsvector('english', coalesce(overview, '')), 'B');"))
+    .then(() => knex.raw('REFRESH MATERIALIZED VIEW search_movie'));
 };
