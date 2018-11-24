@@ -27,6 +27,7 @@ SELECT count(*)
 FROM movie
 WHERE text_search_vector @@ to_tsquery('english', 'eat');
 
+-- Cost 121.16, Execution time: 1.236 ms
 SELECT title, overview
 FROM search_movie
 WHERE text_search_vector @@ to_tsquery('english', 'eat');
@@ -67,3 +68,23 @@ WHERE movie.title ILIKE '%eat%'
   OR movie_genre.name ILIKE '%eat%';
 
 
+-- Cost 3814.73, Execution time: 1110.465 ms
+EXPLAIN ANALYZE
+SELECT movie.title, movie_genre.name
+FROM movie
+LEFT JOIN movie_movie_genre ON (movie.id = movie_movie_genre."movieId")
+LEFT JOIN movie_genre ON (movie_movie_genre."movieGenreId" = movie_genre.id)
+WHERE
+  movie.text_search_vector @@ to_tsquery('english', 'eat')
+  OR movie_genre.text_search_vector @@ to_tsquery('english', 'eat');
+
+
+SELECT title, overview, "movieGenres"
+FROM search_movie
+WHERE text_search_vector @@ plainto_tsquery('english', 'Documentary about eating');
+
+-- Cost 24.02, Execution time: 0.143 ms
+EXPLAIN ANALYZE
+SELECT title, overview, "movieGenres"
+FROM search_movie
+WHERE text_search_vector @@ plainto_tsquery('english', 'Documentary about insects');

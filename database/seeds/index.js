@@ -43,5 +43,8 @@ exports.seed = async function(knex, Promise) {
   await knex.schema.raw(
     "UPDATE movie SET text_search_vector = setweight(to_tsvector('english', coalesce(title, '')), 'A') || setweight(to_tsvector('english', coalesce(overview, '')), 'B');"
   );
+  await knex.schema.raw(
+    "UPDATE movie_genre SET text_search_vector = setweight(to_tsvector('english', coalesce(name, '')), 'A');"
+  );
   await knex.raw("REFRESH MATERIALIZED VIEW search_movie");
 };
