@@ -12,11 +12,21 @@ const parser = new Promise(function(resolve, reject) {
   );
 });
 
-const printMovies = async () => {
+const convertMoviesFromCsvToJson = async () => {
   const data = await parser;
   const tenThousandFirstRows = data
     .slice(0, 10000)
-    .map(({ title, overview }) => ({ title, overview }));
+    .map(({ title, overview, genres }) => {
+      const parsedGenres =
+        genres && genres.length
+          ? JSON.parse(genres.replace(/\'/g, '"')).map(({ name }) => name)
+          : [];
+      return {
+        title,
+        overview,
+        genres: parsedGenres
+      };
+    });
   const stringifiedObject = JSON.stringify(tenThousandFirstRows);
   fs.writeFile(
     __dirname + "/kaggleMovies.json",
@@ -29,4 +39,4 @@ const printMovies = async () => {
   return data;
 };
 
-export default printMovies();
+export default convertMoviesFromCsvToJson();
