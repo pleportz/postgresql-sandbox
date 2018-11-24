@@ -30,3 +30,40 @@ WHERE text_search_vector @@ to_tsquery('english', 'eat');
 SELECT title, overview
 FROM search_movie
 WHERE text_search_vector @@ to_tsquery('english', 'eat');
+
+-- Cost 2777.05, Execution time: 23.104 ms
+EXPLAIN ANALYZE
+SELECT movie.title, movie_genre.name
+FROM movie
+LEFT JOIN movie_movie_genre
+  ON movie.id = movie_movie_genre."movieId"
+LEFT JOIN movie_genre
+  ON movie_movie_genre."movieGenreId" = movie_genre.id;
+
+CREATE INDEX movie_movie_genre_movieid_index ON movie_movie_genre ("movieId");
+CREATE INDEX movie_movie_genre_moviegenreid_index ON movie_movie_genre ("movieGenreId");
+DROP INDEX IF EXISTS movie_movie_genre_movieid_index;
+DROP INDEX IF EXISTS movie_movie_genre_moviegenreid_index;
+
+-- Adventure, Fantasy, Family
+SELECT movie.title, movie_genre.name
+FROM movie
+LEFT JOIN movie_movie_genre
+  ON movie.id = movie_movie_genre."movieId"
+LEFT JOIN movie_genre
+  ON movie_movie_genre."movieGenreId" = movie_genre.id
+WHERE movie.title = 'Jumanji';
+
+-- Cost 2777.07, Execution time: 219.309 ms
+EXPLAIN ANALYZE
+SELECT movie.title, movie_genre.name
+FROM movie
+LEFT JOIN movie_movie_genre
+  ON movie.id = movie_movie_genre."movieId"
+LEFT JOIN movie_genre
+  ON movie_movie_genre."movieGenreId" = movie_genre.id
+WHERE movie.title ILIKE '%eat%'
+  OR movie.overview ILIKE '%eat%'
+  OR movie_genre.name ILIKE '%eat%';
+
+
