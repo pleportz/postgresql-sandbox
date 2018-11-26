@@ -28,6 +28,7 @@ FROM movie
 WHERE text_search_vector @@ to_tsquery('english', 'eat');
 
 -- Cost 121.16, Execution time: 1.236 ms
+EXPLAIN ANALYZE
 SELECT title, overview
 FROM search_movie
 WHERE text_search_vector @@ to_tsquery('english', 'eat');
@@ -88,3 +89,13 @@ EXPLAIN ANALYZE
 SELECT title, overview, "movieGenres"
 FROM search_movie
 WHERE text_search_vector @@ plainto_tsquery('english', 'Documentary about insects');
+
+-- Cost 180.29, Execution time: 9.356 ms
+EXPLAIN ANALYZE
+SELECT title, ts_rank(text_search_vector, query) AS rank
+FROM search_movie, to_tsquery('english', 'future') AS query
+WHERE text_search_vector @@ query
+ORDER BY rank DESC
+LIMIT 20;
+
+SELECT 'tart' & 'poireau' @@ to_tsvector('french', 'tarte à la tomate');
