@@ -99,3 +99,12 @@ ORDER BY rank DESC
 LIMIT 20;
 
 SELECT 'tart' & 'poireau' @@ to_tsvector('french', 'tarte à la tomate');
+
+-- Cost 5063.12, Execution time: 60.347 ms
+EXPLAIN ANALYZE SELECT title FROM movie
+WHERE to_tsquery('english', 'eating') @@ to_tsvector('english', title);
+
+EXPLAIN ANALYZE SELECT title, ts_rank(to_tsvector('english', title), to_tsquery('english', 'eating')) AS rank
+FROM movie
+WHERE to_tsquery('english', 'eating') @@ to_tsvector('english', title)
+ORDER BY ts_rank(to_tsvector('english', title), to_tsquery('english', 'eating')) DESC;
