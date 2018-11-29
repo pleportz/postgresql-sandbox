@@ -108,3 +108,11 @@ EXPLAIN ANALYZE SELECT title, ts_rank(to_tsvector('english', title), to_tsquery(
 FROM movie
 WHERE to_tsquery('english', 'eating') @@ to_tsvector('english', title)
 ORDER BY ts_rank(to_tsvector('english', title), to_tsquery('english', 'eating')) DESC;
+
+-- Concaténer des ts_vector
+SELECT to_tsvector('french', 'Tarte à la tomate') || to_tsvector('french', 'Coupez les tomates en dés');
+
+-- Concaténer des ts_vector et leur donner chacun un poids
+SELECT setweight(to_tsvector('french', 'Tarte à la tomate'), 'A') || setweight(to_tsvector('french', 'Coupez les tomates en dés'), 'B');
+
+SELECT ts_rank(to_tsvector('french', 'Tarte à la tomate'), to_tsquery('french', 'Aligot & et & saucisse & de & Montbéliard'));
