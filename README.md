@@ -3,6 +3,8 @@
 - Launch the db with docker: `docker-compose -f docker/docker-compose.yml up`
 - Connect to the db: `psql -h localhost -p 5432 -U docker -d demodb`. Password: `docker`
 
+## Presentation at Node.js Paris meet up: https://slides.com/pierre-louisleportz/deck/ 
+
 ## Study 1 - Search engine with single input field
 
 We have a `book` table with 10,000 entries and the following columns:
